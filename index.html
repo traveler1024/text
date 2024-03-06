@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="点击" @click="clickon()">
+        <table border="1" cellspacing="0" width="60%">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>图像</th>
+                <th>性别</th>
+                <th>职位</th>
+                <th>入职日期</th>
+                <th>最后操作时间</th>
+            </tr>
+<tr align="center">
+                <td>{{id}}</td>
+<td>{{name}}</td>
+            </tr>
+        </table>
+    </div>
+    <script src="js/axios-0.18.0.js"></script>
+    <script src="js/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                datas: [],
+id:10,
+name:''
+            },
+            mounted() {
+                    axios.get("https://mock.apifox.com/m2/3396460-0-default/152891361").then(resp => {
+                        this.datas = resp.data;
+this.id=resp.data.id;
+this.name=resp.data.name;
+                        console.log(this.datas);
+ console.log(this.id);
+                    })
+            },
+            methods: {
+                clickon: function () {
+                    var _this = this;
+                    axios.get("https://mock.apifox.com/m2/3396460-0-default/152891361").then(resp => {
+                        _this.datas = resp.data;
+                        console.log(_this.datas);
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
